@@ -68,6 +68,10 @@ public class StudentController {
                        BindingResult result,
                        Model model,
                        RedirectAttributes ra) {
+        if (!result.hasFieldErrors("studentCode")
+                && (student.getStudentCode() == null || !student.getStudentCode().matches("B[A-Za-z]{2}(2[0-9]|30)[0-9]{4}"))) {
+            result.rejectValue("studentCode", "invalid", "Mã sinh viên không hợp lệ. Định dạng: B + 2 chữ cái + số từ 20 đến 30 + 4 chữ số, ví dụ BIT240024");
+        }
         if (!result.hasFieldErrors("studentCode") && service.isCodeDuplicated(student)) {
             result.rejectValue("studentCode", "duplicate", "Mã sinh viên đã tồn tại");
         }

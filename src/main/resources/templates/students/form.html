@@ -21,9 +21,10 @@
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label class="form-label">Mã sinh viên *</label>
-                        <input class="form-control" th:field="*{studentCode}"
+                        <input class="form-control" th:field="*{studentCode}" placeholder="BIT240024"
+                               pattern="B[A-Za-z]{2}(2[0-9]|30)[0-9]{4}" title="Mã gồm đúng 9 ký tự: B + 2 chữ cái + số từ 20 đến 30 + 4 chữ số, ví dụ BIT240024"
                                th:classappend="${#fields.hasErrors('studentCode')} ? 'is-invalid'">
-                        <div class="invalid-feedback" th:errors="*{studentCode}"></div>
+                        <div id="studentCodeError" class="invalid-feedback" th:errors="*{studentCode}"></div>
                     </div>
                     <div class="col-md-8">
                         <label class="form-label">Họ tên *</label>
@@ -80,5 +81,33 @@
         </div>
     </div>
 </div>
+<script>
+    (() => {
+        const form = document.querySelector('form');
+        const input = document.getElementById('studentCode');
+        const error = document.getElementById('studentCodeError');
+        const format = /^B[A-Za-z]{2}(2[0-9]|30)[0-9]{4}$/;
+        const message = 'Mã sinh viên không hợp lệ. Nhập đúng 9 ký tự: B + 2 chữ cái + số từ 20 đến 30 + 4 chữ số (ví dụ BIT240024).';
+        let submitted = false;
+
+        function validateStudentCode() {
+            const valid = format.test(input.value);
+            input.classList.toggle('is-invalid', !valid);
+            error.textContent = valid ? '' : message;
+            return valid;
+        }
+
+        input.addEventListener('input', () => {
+            if (submitted) validateStudentCode();
+        });
+        form.addEventListener('submit', event => {
+            submitted = true;
+            if (!validateStudentCode()) {
+                event.preventDefault();
+                input.focus();
+            }
+        });
+    })();
+</script>
 </body>
 </html>

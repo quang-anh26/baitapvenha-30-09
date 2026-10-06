@@ -16,7 +16,8 @@ public class Student {
     private Long id;
 
     @NotBlank(message = "Mã sinh viên không được để trống")
-    @Size(max = 20, message = "Mã sinh viên tối đa 20 ký tự")
+    @Size(max = 9, message = "Mã sinh viên tối đa 9 ký tự")
+    @Pattern(regexp = "^B[A-Za-z]{2}(2[0-9]|30)[0-9]{4}$", message = "Mã sinh viên không hợp lệ. Định dạng: B + 2 chữ cái + số từ 20 đến 30 + 4 chữ số, ví dụ BIT240024")
     @Column(name = "student_code", nullable = false, length = 20)
     private String studentCode;
 
@@ -55,24 +56,78 @@ public class Student {
     @Column(name = "class_name", nullable = false, length = 50)
     private String className;
 
-    public Student() {}
+    public Student() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getStudentCode() { return studentCode; }
-    public void setStudentCode(String studentCode) { this.studentCode = studentCode; }
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public LocalDate getDateOfBirth() { return dateOfBirth; }
-    public void setDateOfBirth(LocalDate dateOfBirth) { this.dateOfBirth = dateOfBirth; }
-    public String getGender() { return gender; }
-    public void setGender(String gender) { this.gender = gender; }
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-    public String getClassName() { return className; }
-    public void setClassName(String className) { this.className = className; }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStudentCode() {
+        return studentCode;
+    }
+
+    public void setStudentCode(String studentCode) {
+        this.studentCode = studentCode;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 }

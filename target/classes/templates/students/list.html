@@ -19,11 +19,7 @@
     <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 
     <div class="d-flex justify-content-between mb-3">
-        <form class="d-flex" th:action="@{/students}" method="get">
-            <input class="form-control me-2" type="text" name="keyword" th:value="${keyword}"
-                   placeholder="Tìm theo mã hoặc họ tên...">
-            <button class="btn btn-outline-primary" type="submit">Tìm</button>
-        </form>
+        
         <a class="btn btn-success" th:href="@{/students/new}">+ Thêm sinh viên</a>
     </div>
 
