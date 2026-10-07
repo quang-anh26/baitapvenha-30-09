@@ -1,6 +1,7 @@
 package com.example.studentmanagement.config;
 
 import com.example.studentmanagement.middleware.RequestLoggingMiddleware;
+import com.example.studentmanagement.middleware.MiddlewareStatusStore;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +15,9 @@ import org.springframework.core.Ordered;
 public class MiddlewareConfig {
 
     @Bean
-    public FilterRegistrationBean<RequestLoggingMiddleware> requestLoggingFilter() {
+    public FilterRegistrationBean<RequestLoggingMiddleware> requestLoggingFilter(MiddlewareStatusStore statusStore) {
         FilterRegistrationBean<RequestLoggingMiddleware> bean = new FilterRegistrationBean<>();
-        bean.setFilter(new RequestLoggingMiddleware());
+        bean.setFilter(new RequestLoggingMiddleware(statusStore));
         bean.addUrlPatterns("/*");
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE); // so nho = chay truoc
         return bean;
